@@ -1,20 +1,20 @@
 NAME = phonebook
 FLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = 	Contact.cpp \
-		Input.cpp \
-		Library.cpp \
-		Manager.cpp \
-		Output.cpp \
-		PhoneBook.cpp \
-		main.cpp
+SRCS = 	main.cpp		\
+		PhoneBook.cpp	\
+		Contact.cpp		\
+		Output.cpp		\
+		Input.cpp		\
+		Helper.cpp
+
 OBJ_PATH = ./objs/
 OBJS = $(patsubst %.cpp,$(OBJ_PATH)%.o,$(SRCS))
-CC = c++
+CPP = c++
 
 all:$(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	@$(CPP) $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "                                                         "
 	@echo " \033[1;32m  ___|   _ \    \  |   _ \ _ _|  |      ____|  __ \   | "
 	@echo "  |      |   |  |\/ |  |   |  |   |      __|    |   |  | "
@@ -22,8 +22,8 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 	@echo " \____| \___/  _|  _| _|    ___| _____| _____| ____/  _) \033[0m"
 	@echo "                                                         "
 
-$(OBJ_PATH)%.o: %.cpp $(INC)
-	@$(CC) $(FLAGS) -c $< -o $@
+$(OBJ_PATH)%.o: %.cpp
+	@$(CPP) $(FLAGS) -c $< -o $@
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)

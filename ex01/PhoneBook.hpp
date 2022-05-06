@@ -1,36 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 21:32:10 by fbindere          #+#    #+#             */
-/*   Updated: 2022/02/25 20:53:47 by fbindere         ###   ########.fr       */
+/*   Created: 2022/05/05 17:04:29 by fbindere          #+#    #+#             */
+/*   Updated: 2022/05/06 18:18:53 by fbindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
-
 # define PHONEBOOK_HPP
-# include "Contact.hpp"
+
+#include "Contact.hpp"
+#include "Output.hpp"
+#include "Input.hpp"
+#include "Helper.hpp"
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
 
 class PhoneBook
 {
 	private:
-		Contact	contact[8];
-		int		position;
+		Contact 		contact[8];
+		unsigned int	position;
 	public:
 		PhoneBook();
 		~PhoneBook();
-		bool		add_contact(std::string firstname, std::string lastname,
-						std::string nickname, std::string phonenumber,
+		void Add(void);
+		void Search(void);
+		void AddContact(std::string firstname, 
+						std::string lastname,
+						std::string	nickname,
+						std::string	phonenumber,
 						std::string darkestsecret);
-		Contact		get_contact(int index);
-		bool		check_contact(int index);
-		static bool	valid_index(int	index);
+		std::string	AddFirstname();
+		std::string	AddLastname();
+		std::string	AddNickname();
+		std::string	AddPhonenumber();
+		std::string	AddDarkestsecret();
+		void DisplayPhoneBook(void);
+		void DisplayContactColumns(int i);
+		void DisplayHeader(void);
+		unsigned int	IndexSearch(void);
+		void DisplayContact(int i);
+		bool ValidIndex(unsigned int index);
 };
-
-std::ostream& operator<< (std::ostream& os, PhoneBook& phonebook);
 
 #endif

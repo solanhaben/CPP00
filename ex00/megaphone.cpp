@@ -5,32 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 19:57:12 by fbindere          #+#    #+#             */
-/*   Updated: 2022/02/21 21:07:02 by fbindere         ###   ########.fr       */
+/*   Created: 2022/05/04 17:54:57 by fbindere          #+#    #+#             */
+/*   Updated: 2022/05/04 21:39:27 by fbindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include <string>
+#include <iostream>
 
-std::string	str_to_upper(std::string str)
+std::string str_to_upper(std::string string) 
 {
-	for(int i = 0; i < str.length(); i++)
-		str[i] = std::toupper(str[i]);
-	return (str);
+	for (int i = 0; string[i]; i++)
+		string[i] = std::toupper(string[i]);
+	return (string);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	std::string	str;
+	std::string string;
 
 	if (argc == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	for (int i = 1; i < argc; i++)
+		string = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	else
 	{
-		str = std::string(argv[i]);
-		str = str_to_upper(str);
-		std::cout << str;
+		for (int i = 1; argv[i]; i++)
+			string += argv[i];
 	}
-	std::cout << std::endl;
+	std::cout << str_to_upper(string) << std::endl;
 }

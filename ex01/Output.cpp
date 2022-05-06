@@ -5,72 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 21:47:47 by fbindere          #+#    #+#             */
-/*   Updated: 2022/02/25 17:39:05 by fbindere         ###   ########.fr       */
+/*   Created: 2022/05/05 20:20:01 by fbindere          #+#    #+#             */
+/*   Updated: 2022/05/06 17:23:07 by fbindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Output.hpp"
+# include "Output.hpp"
 
-void	Output::print_message(std::string str)
+void Output::PromptIndex(void)
 {
-	std::cout << str << std::endl;
+	PrintString(std::string("Enter index to see a contact's details: "));
 }
 
-void	Output::print_contact(Contact contact)
+void Output::PrintColumn(std::string string)
 {
-	std::cout << contact << std::endl;
+	std::string truncString;
+	
+	truncString = Helper::Truncate(string);
+	std::cout << std::setw(10) << std::right << truncString;
 }
 
-void	Output::print_phonebook(PhoneBook phonebook)
+void	Output::PrintStringEndl(std::string string)
 {
-	std::cout << phonebook << std::endl;
+	std::cout << string << std::endl;
 }
 
-void	Output::prompt_firstname()
+void	Output::PrintString(std::string string)
 {
-	print_message("Enter firstname:");
+	std::cout << string;
 }
 
-void	Output::prompt_lastname()
+void	Output::PromptFirstname()
 {
-	print_message("Enter lastname:");
+	PrintString(std::string("Enter Firstname: "));	
 }
 
-void	Output::prompt_nickname()
+void	Output::PromptLastname()
 {
-	print_message("Enter nickname:");
+	PrintString(std::string("Enter Lastname: "));	
 }
 
-void	Output::prompt_phonenumber()
+void	Output::PromptNickname()
 {
-	print_message("Enter phonenumber:");
+	PrintString(std::string("Enter Nickname: "));	
 }
 
-void	Output::prompt_darkestsecret()
+void	Output::PromptDarkestsecret()
 {
-	print_message("Enter darkestsecret:");
+	PrintString(std::string("Enter Darkestsecret: "));	
 }
 
-void	Output::prompt_index()
+void	Output::PromptPhonenumber()
 {
-	print_message("Enter contact index (0 - 7):");
+	PrintString(std::string("Enter Phonenumber: "));	
 }
 
-void	Output::prompt_command()
+void	Output::PromptCommand()
 {
-	print_message("Enter command (ADD / SEARCH / EXIT):");
-}
-
-void	Output::print_invalidiput()
-{
-	print_message("invalid input!");
-}
-
-Output::Output()
-{
-}
-
-Output::~Output()
-{
+	PrintString(std::string("Enter Command: "));	
 }

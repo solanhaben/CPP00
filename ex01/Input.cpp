@@ -5,81 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 21:47:18 by fbindere          #+#    #+#             */
-/*   Updated: 2022/02/25 20:19:35 by fbindere         ###   ########.fr       */
+/*   Created: 2022/05/05 20:00:41 by fbindere          #+#    #+#             */
+/*   Updated: 2022/05/06 18:32:38 by fbindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Input.hpp"
 
-
-Input::Input()
+int	Input::ScanIndex(void)
 {
+	int index;
+
+	std::cin >> index;
+	return (index);
 }
 
-Input::~Input()
+std::string Input::ScanString(void)
 {
+	std::string string;
+
+	getline(std::cin, string);
+	if (std::cin.eof())
+		exit(EXIT_SUCCESS);
+	return (string);
 }
 
-Command	Input::scan_command()
+t_cmd	Input::ScanCommand(void)
 {
-	std::string	str;
+	std::string	string;
 
-	std::cin >> str;
-	if (!str.compare("SEARCH"))
-		return(SEARCH);
-	if (!str.compare("ADD"))
-		return(ADD);
-	if (!str.compare("EXIT"))
-		return(EXIT);
-	return(ERROR);
-}
-
-std::string	Input::scan_string()
-{
-	std::string str;
-
-	std::cin >> str;
-	return (str);
-}
-
-bool	Input::scan_int(int &integer)
-{
-	if (std::cin >> integer)
-		return (true);
-	return (false);
-}
-
-std::string Input::scan_firstname()
-{
-	return(scan_string());
-}
-
-std::string Input::scan_lastname()
-{
-	return(scan_string());
-}
-
-std::string Input::scan_nickname()
-{
-	return(scan_string());
-}
-
-std::string Input::scan_phonenumber()
-{
-	return(scan_string());
-}
-
-std::string Input::scan_darkestsecret()
-{
-	return(scan_string());
-}
-
-int	Input::scan_index()
-{
-	int	index;
-	if(!scan_int(index))
-		return (-1);
+	string = ScanString();
+	if (!string.compare("ADD"))
+		return (ADD);
+	else if (!string.compare("SEARCH"))
+		return (SEARCH);
+	else if (!string.compare("EXIT"))
+		return (EXIT);
 	else
-		return (index);
+		return (ERROR);
 }
