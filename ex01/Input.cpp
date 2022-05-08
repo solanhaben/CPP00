@@ -1,28 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Input.cpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: khammers <khammers@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 20:00:41 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 21:15:49 by khammers         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Input.hpp"
-
-int	Input::ScanIndex(void)
-{
-	int index;
-
-	std::cin >> index;
-	return (index);
-}
 
 std::string Input::ScanString(void)
 {
 	std::string string;
+
 
 	getline(std::cin, string);
 	if (std::cin.eof())
@@ -34,7 +15,11 @@ t_cmd	Input::ScanCommand(void)
 {
 	std::string	string;
 
-	string = ScanString();
+	while (string.empty())
+	{
+		Output::PromptCommand();
+		string = ScanString();
+	}
 	if (!string.compare("ADD"))
 		return (ADD);
 	else if (!string.compare("SEARCH"))

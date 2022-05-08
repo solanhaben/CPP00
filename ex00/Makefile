@@ -26,9 +26,8 @@ clean:
 	@rm -rf $(OBJ_PATH)
 	@echo "\033[1;32m.o files removed!\033[0m"
 
-fclean:
+fclean: clean
 	@rm -rf $(NAME)
-	@rm -rf $(OBJ_PATH)
 	@echo "\033[1;32mbinary files removed!\033[0m"
 
 re: fclean all

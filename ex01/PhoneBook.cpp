@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 16:27:07 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 18:39:43 by fbindere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
@@ -21,18 +9,17 @@ PhoneBook::~PhoneBook()
 {
 }
 
-bool PhoneBook::ValidIndex(unsigned int index)
+int	PhoneBook::Exit(void)
 {
-	if (index < 0 || index > 7 || index > position - 1)
-		return (false);
-	return (true);
+	Output::ExitPhoneBook();
+	return (EXIT_SUCCESS);
 }
 
 void	PhoneBook::AddContact(
-		std::string firstname, 
+		std::string firstname,
 		std::string lastname,
 		std::string	nickname,
-		std::string	phonenumber,
+		std::string phonenumber,
 		std::string darkestsecret)
 {
 	contact[position % 8].set_firstname(firstname);
@@ -46,10 +33,10 @@ void	PhoneBook::AddContact(
 std::string	PhoneBook::AddFirstname()
 {
 	std::string string;
-	
+
 	Output::PromptFirstname();
 	string = Input::ScanString();
-	if (!Helper::ValidFirstname(string))
+	if (string.empty() || !Helper::ValidFirstname(string))
 	{
 		Output::PrintStringEndl(std::string("Error: Invalid Firstname"));
 		return(AddFirstname());
@@ -60,10 +47,10 @@ std::string	PhoneBook::AddFirstname()
 std::string	PhoneBook::AddLastname()
 {
 	std::string string;
-	
+
 	Output::PromptLastname();
 	string = Input::ScanString();
-	if (!Helper::ValidLastname(string))
+	if (string.empty() || !Helper::ValidLastname(string))
 	{
 		Output::PrintStringEndl(std::string("Error: Invalid Lastname"));
 		return(AddLastname());
@@ -74,10 +61,10 @@ std::string	PhoneBook::AddLastname()
 std::string	PhoneBook::AddNickname()
 {
 	std::string string;
-	
+
 	Output::PromptNickname();
 	string = Input::ScanString();
-	if (!Helper::ValidNickname(string))
+	if (string.empty() || !Helper::ValidNickname(string))
 	{
 		Output::PrintStringEndl(std::string("Error: Invalid Nickname"));
 		return(AddNickname());
@@ -88,10 +75,10 @@ std::string	PhoneBook::AddNickname()
 std::string	PhoneBook::AddPhonenumber()
 {
 	std::string string;
-	
+
 	Output::PromptPhonenumber();
 	string = Input::ScanString();
-	if (!Helper::ValidPhonenumber(string))
+	if (string.empty() || !Helper::ValidPhonenumber(string))
 	{
 		Output::PrintStringEndl(std::string("Error: Invalid Phonenumber"));
 		return(AddPhonenumber());
@@ -102,10 +89,10 @@ std::string	PhoneBook::AddPhonenumber()
 std::string	PhoneBook::AddDarkestsecret()
 {
 	std::string string;
-	
+
 	Output::PromptDarkestsecret();
 	string = Input::ScanString();
-	if (!Helper::ValidDarkestsecret(string))
+	if (string.empty() || !Helper::ValidDarkestsecret(string))
 	{
 		Output::PrintStringEndl(std::string("Error: Invalid Darkestsecret"));
 		return(AddDarkestsecret());
@@ -115,6 +102,8 @@ std::string	PhoneBook::AddDarkestsecret()
 
 void	PhoneBook::Add(void)
 {
+	Output::PrintStringEndl(std::string(""));
+	Output::PrintStringEndl(std::string("To add a new contact please enter all contact details below:"));
 	PhoneBook::AddContact(
 		AddFirstname(),
 		AddLastname(),
@@ -124,28 +113,42 @@ void	PhoneBook::Add(void)
 	);
 }
 
+bool PhoneBook::ValidIndex(unsigned int index)
+{
+	if (index < 1 || index > 8 || index > position)
+		return (false);
+	return (true);
+}
+
 unsigned int	PhoneBook::IndexSearch(void)
 {
 	unsigned int	index;
-	
-	Output::PromptIndex();
-	index = Input::ScanIndex();
-	if (!ValidIndex(index))
-	{
-		Output::PrintStringEndl(std::string("Error: Invalid Index."));
-		return (IndexSearch());
-	}
-	return (index);
-}
+	std::string		indexStr;
 
-void PhoneBook::Search(void)
-{
-	DisplayPhoneBook();
-	DisplayContact(IndexSearch());
+	while (1)
+	{
+		Output::PromptIndex();
+		indexStr = Input::ScanString();
+		if (indexStr.empty())
+			continue ;
+		if (!Helper::Iterate(indexStr, isdigit))
+		{
+			Output::PrintStringEndl(std::string("Error. The index can only contain digits."));
+			continue ;
+		}
+		index = atoi(indexStr.c_str());
+		if (!ValidIndex(index))
+		{
+			Output::PrintStringEndl(std::string("Error: Invalid Index."));
+			continue ;
+		}
+		return (index);
+	}
 }
 
 void PhoneBook::DisplayContact(int i)
 {
+	Output::PrintStringEndl(std::string(""));
 	Output::PrintString(std::string("Firstname: "));
 	Output::PrintStringEndl(contact[i].get_firstname());
 	Output::PrintString("Lastname: ");
@@ -155,17 +158,33 @@ void PhoneBook::DisplayContact(int i)
 	Output::PrintString("Phonenumber: ");
 	Output::PrintStringEndl(contact[i].get_phonenumber());
 	Output::PrintString("Darkestsecret: ");
-	Output::PrintStringEndl(contact[i].get_darkestsecret());	
+	Output::PrintStringEndl(contact[i].get_darkestsecret());
+	Output::PrintStringEndl(std::string(""));
+}
+
+void PhoneBook::Search(void)
+{
+	unsigned int index;
+
+	if (position == 0)
+	{
+		Output::PrintStringEndl(std::string("Phonebook empty. Nothing to display."));
+		return ;
+	}
+	DisplayPhoneBook();
+	Output::PrintStringEndl("");
+	index = IndexSearch();
+	DisplayContact(index - 1);
 }
 
 void PhoneBook::DisplayContactColumns(int i)
 {
-	std::cout << std::setw(10) << std::right << i;
-	Output::PrintString(std::string(" | "));	
+	std::cout << std::setw(10) << std::right << i + 1;
+	Output::PrintString(std::string(" | "));
 	Output::PrintColumn(contact[i].get_firstname());
-	Output::PrintString(std::string(" | "));	
+	Output::PrintString(std::string(" | "));
 	Output::PrintColumn(contact[i].get_lastname());
-	Output::PrintString(std::string(" | "));	
+	Output::PrintString(std::string(" | "));
 	Output::PrintColumn(contact[i].get_nickname());
 	std::cout << std::endl;
 }
@@ -189,6 +208,6 @@ void PhoneBook::DisplayPhoneBook(void)
 	{
 		if (i == 8)
 			break ;
-		DisplayContactColumns(i);		
+		DisplayContactColumns(i);
 	}
 }

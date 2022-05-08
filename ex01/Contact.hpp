@@ -1,21 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   contact.hpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 16:30:05 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 18:16:57 by fbindere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
 #include "Helper.hpp"
 #include <iostream>
-#include <string>
 
 class Contact
 {
@@ -25,6 +12,7 @@ class Contact
 		std::string	nickname;
 		std::string	phonenumber;
 		std::string	darkestsecret;
+
 	public:
 		std::string get_firstname();
 		std::string get_lastname();
@@ -37,7 +25,7 @@ class Contact
 		void		set_phonenumber(std::string phonenumber);
 		void		set_darkestsecret(std::string darkestsecret);
 
-		Contact(/* args */);
+		Contact();
 		~Contact();
 };
 

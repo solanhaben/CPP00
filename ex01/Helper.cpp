@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Helper.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: khammers <khammers@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 21:13:37 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 21:17:01 by khammers         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Helper.hpp"
-
 
 std::string Helper::Truncate(std::string string)
 {
@@ -25,7 +12,7 @@ bool	Helper::Iterate(std::string string, int (&function)(int))
 {
 	for (size_t i = 0; i < string.length(); i++)
 	{
-		if (!function(string[i]))
+		if (!function(string[i]) && string[i] != ' ')
 			return (false);
 	}
 	return (true);

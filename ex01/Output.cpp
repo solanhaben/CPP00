@@ -1,16 +1,39 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Output.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 20:20:01 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 17:23:07 by fbindere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 # include "Output.hpp"
+
+void Output::DisplayWelcomingMessage(void)
+{
+	Output::PrintStringEndl(std::string(""));
+	Output::PrintStringEndl(std::string("          *~*~*~*~   WELCOME TO YOUR PHONEBOOK   ~*~*~*~*"));
+}
+
+void Output::DisplayCase(void)
+{
+	std::cout << std::setw(65) << " ________________________________________________________________" << std::endl;
+	std::cout << std::setw(65) << "|                                                                |" << std::endl;
+	std::cout << std::setw(65) << "|      PLEASE ENTER ONE OF THE FOLLOWING COMMANDS BELOW          |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|      ADD    : to add a new contact                             |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|      SEARCH : to see an overview of all contacts and           |" << std::endl;
+	std::cout << std::setw(65) << "|               select one specific contact                      |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|      EXIT   : to exit the phonebook                            |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|________________________________________________________________|" << std::endl;
+	std::cout << std::endl;
+}
+
+void Output::ExitPhoneBook(void)
+{
+	std::cout << std::setw(65) << " ________________________________________________________________" << std::endl;
+	std::cout << std::setw(65) << "|                                                                |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|      LEAVING YOUR PHONEBOOK IMMEDIATELY. YOU SUCCESSFULLY,     |" << std::endl;
+	std::cout << std::setw(65) << "|             DELETED ALL YOUR CONTACTS! WELL DONE!              |" << std::endl;
+	std::cout << std::setw(65) << "|      - - - - - - - - - - - - - - - - - - - - - - - - - -       |" << std::endl;
+	std::cout << std::setw(65) << "|________________________________________________________________|" << std::endl;
+	std::cout << std::endl;
+}
 
 void Output::PromptIndex(void)
 {
@@ -20,7 +43,7 @@ void Output::PromptIndex(void)
 void Output::PrintColumn(std::string string)
 {
 	std::string truncString;
-	
+
 	truncString = Helper::Truncate(string);
 	std::cout << std::setw(10) << std::right << truncString;
 }
@@ -37,30 +60,30 @@ void	Output::PrintString(std::string string)
 
 void	Output::PromptFirstname()
 {
-	PrintString(std::string("Enter Firstname: "));	
+	PrintString(std::string("Enter Firstname: "));
 }
 
 void	Output::PromptLastname()
 {
-	PrintString(std::string("Enter Lastname: "));	
+	PrintString(std::string("Enter Lastname: "));
 }
 
 void	Output::PromptNickname()
 {
-	PrintString(std::string("Enter Nickname: "));	
+	PrintString(std::string("Enter Nickname: "));
 }
 
 void	Output::PromptDarkestsecret()
 {
-	PrintString(std::string("Enter Darkestsecret: "));	
+	PrintString(std::string("Enter Darkestsecret: "));
 }
 
 void	Output::PromptPhonenumber()
 {
-	PrintString(std::string("Enter Phonenumber: "));	
+	PrintString(std::string("Enter Phonenumber: "));
 }
 
 void	Output::PromptCommand()
 {
-	PrintString(std::string("Enter Command: "));	
+	PrintString(std::string("Enter Command: "));
 }

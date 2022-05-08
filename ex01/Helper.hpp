@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Helper.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fbindere <fbindere@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 21:05:27 by fbindere          #+#    #+#             */
-/*   Updated: 2022/05/06 18:17:35 by fbindere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef HELPER_HPP
 # define HELPER_HPP
 
@@ -24,6 +12,6 @@ namespace Helper
 	bool		ValidNickname(std::string nickname);
 	bool		ValidPhonenumber(std::string phonenumber);
 	bool		ValidDarkestsecret(std::string darkestsecret);
-} 
+}
 
 #endif

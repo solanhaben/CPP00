@@ -1,11 +1,7 @@
-NAME = phonebook
+NAME = account
 FLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS =	PhoneBook.cpp	\
-		Contact.cpp		\
-		Input.cpp		\
-		Output.cpp		\
-		main.cpp		\
-		Helper.cpp		
+SRCS =	Account.cpp		\
+		tests.cpp
 OBJ_PATH = ./objs/
 OBJS = $(patsubst %.cpp,$(OBJ_PATH)%.o,$(SRCS))
 CPP = c++
